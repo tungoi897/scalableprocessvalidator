@@ -1,15 +1,7 @@
-function longestValidParentheses(s) {
-  if (s.length === 0) return 0;
-  let max = 0;
-  const dp = new Array(s.length).fill(0);
-  for (let i = 1; i < s.length; i++) {
-    if (s[i] === ")") {
-      if (s[i - 1] === "(") dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
-      else if (i - dp[i - 1] > 0 && s[i - dp[i - 1] - 1] === "(")
-        dp[i] =
-          dp[i - 1] + (i - dp[i - 1] >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
-      max = Math.max(max, dp[i]);
-    }
+const fibonacci = (n) => {
+  const sequence = [0, 1];
+  for (let i = 2; i <= n; i++) {
+    sequence.push(sequence[i - 1] + sequence[i - 2]);
   }
-  return max;
-}
+  return sequence;
+};
