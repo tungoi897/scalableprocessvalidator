@@ -1,7 +1,15 @@
-const fibonacci = (n) => {
-  const sequence = [0, 1];
-  for (let i = 2; i <= n; i++) {
-    sequence.push(sequence[i - 1] + sequence[i - 2]);
+function isValidBST(root) {
+  const stack = [];
+  let inorder = -Infinity;
+  while (stack.length || root) {
+    while (root) {
+      stack.push(root);
+      root = root.left;
+    }
+    root = stack.pop();
+    if (root.val <= inorder) return false;
+    inorder = root.val;
+    root = root.right;
   }
-  return sequence;
-};
+  return true;
+}
