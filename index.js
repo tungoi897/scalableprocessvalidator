@@ -1,15 +1,14 @@
-function isValidBST(root) {
-  const stack = [];
-  let inorder = -Infinity;
-  while (stack.length || root) {
-    while (root) {
-      stack.push(root);
-      root = root.left;
+function rob(nums) {
+  if (nums.length === 1) return nums[0];
+  const robRange = (start, end) => {
+    let prevMax = 0;
+    let currMax = 0;
+    for (let i = start; i <= end; i++) {
+      const temp = currMax;
+      currMax = Math.max(currMax, prevMax + nums[i]);
+      prevMax = temp;
     }
-    root = stack.pop();
-    if (root.val <= inorder) return false;
-    inorder = root.val;
-    root = root.right;
-  }
-  return true;
+    return currMax;
+  };
+  return Math.max(robRange(0, nums.length - 2), robRange(1, nums.length - 1));
 }
